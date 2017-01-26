@@ -10,6 +10,7 @@ GEM
     json (2.0.3)
     minitest (5.9.0)
     rake (12.0.0)
+    ruby-graphviz (1.2.2)
     simplecov (0.12.0)
       docile (~> 1.1.0)
       json (>= 1.8, < 3)
@@ -22,6 +23,7 @@ PLATFORMS
 DEPENDENCIES
   minitest
   rake
+  ruby-graphviz
   simplecov
   state_machine!
 

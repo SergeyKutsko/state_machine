@@ -9,7 +9,8 @@ Gem::Specification.new do |s|
   s.files       = %w[lib/state_machine.rb lib/state_machine/event.rb]
   s.license       = 'MIT'
 
-  s.add_development_dependency("rake")
-  s.add_development_dependency("simplecov")
-  s.add_development_dependency("minitest")
+  s.add_development_dependency('rake')
+  s.add_development_dependency('simplecov')
+  s.add_development_dependency('minitest')
+  s.add_development_dependency('ruby-graphviz')
 end

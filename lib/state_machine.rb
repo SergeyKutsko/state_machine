@@ -1,6 +1,7 @@
 # The main StateMachine module
 require 'set'
 require 'state_machine/event'
+require 'graphviz'
 
 module StateMachine
   class DoubleInitialStateError < StandardError
@@ -85,6 +86,17 @@ module StateMachine
     end
 
     self.send method, *args, &block
+  end
+
+  def self.draw(klass)
+    GraphViz::new( :G, :type => :digraph ) do |g|
+      nodes = klass.state_transition_table.map do |k, v|
+        node1 = g.add_nodes( k[1].to_s.capitalize )
+        node2 = g.add_nodes( v.to_s.capitalize )
+        g.add_edges( node1, node2, label: k[0].to_s.capitalize)
+      end
+    end.output( :png => "#{klass}.png" )
+    true
   end
 
 end

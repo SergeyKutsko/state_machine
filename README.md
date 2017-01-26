@@ -1,29 +1,26 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
-
 ### What is this repository for? ###
 
-* Quick summary
-* Version
+* Simple state machine implementation for PORO
+* Version 0.0.1
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
 ### How do I get set up? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+* Q: Configuration
+* A: `bundle install`
+* Q: Dependencies?
+* A: [Dependencies](http://www.graphviz.org/Download..php)
+* Q: How to run tests
+* A: `rake test`
 
 ### Contribution guidelines ###
 
 * Writing tests
 * Code review
-* Other guidelines
+* Using Git Flow for feature development
 
 ### Who do I talk to? ###
 
-* Repo owner or admin
-* Other community or team contact
+* Serhii Kutsko project Owner by email kutsko86@gmail.com
