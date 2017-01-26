@@ -6,8 +6,9 @@ Gem::Specification.new do |s|
   s.description = 'A simple State Machine gem'
   s.authors     = ['Serhii Kutsko']
   s.email       = 'kutsko86@gmail.com'
-  s.files       = %w[lib/state_machine.rb lib/state_machine/event.rb]
-  s.license       = 'MIT'
+  s.files       = %w[lib/state_machine.rb lib/state_machine/event.rb lib/state_machine/state.rb]
+  s.license     = 'MIT'
+  s.homepage    = "https://bitbucket.org/sergey_kutsko/state_machine/overview"
 
   s.add_development_dependency('rake')
   s.add_development_dependency('simplecov')

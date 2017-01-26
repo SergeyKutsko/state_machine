@@ -12,12 +12,15 @@ module StateMachine
 
       @machine.state_transition_table ||= Hash.new
       [options[:from]].flatten.each do |state|
-        if not @machine.states.include?(state.to_sym)
+        from_state = State.new(state.to_sym)
+        to_state = State.new(options[:to].to_sym)
+        if not @machine.states.include?(from_state)
           raise UndefinedStateError.new(state)
-        elsif not @machine.states.include?(options[:to].to_sym)
+        elsif not @machine.states.include?(to_state)
           raise UndefinedStateError.new(options[:to])
         end
-        @machine.state_transition_table[[@name.to_sym, state.to_sym]] = ::OpenStruct.new(options.merge(event: self))
+        @machine.state_transition_table[[self, from_state]] =
+          ::OpenStruct.new(event: self, to: to_state, when: options[:when])
       end
     end
 
@@ -31,7 +34,14 @@ module StateMachine
 
     private
 
+    def valid_transition_options_keys
+      @valid_transition_options_keys ||= %i[from to when]
+    end
+
     def validate_transition_params(options)
+      unless (options.keys - valid_transition_options_keys).empty?
+        raise ArgumentError, "Transition args must be #{valid_transition_options_keys.join(", ")}"
+      end
     end
   end
 end
