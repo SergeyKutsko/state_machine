@@ -9,6 +9,7 @@ module StateMachine
 
     def transitions(options = {})
       validate_transition_params(options)
+
       @machine.state_transition_table ||= Hash.new
       [options[:from]].flatten.each do |state|
         if not @machine.states.include?(state.to_sym)
@@ -16,7 +17,7 @@ module StateMachine
         elsif not @machine.states.include?(options[:to].to_sym)
           raise UndefinedStateError.new(options[:to])
         end
-        @machine.state_transition_table[[@name.to_sym, state.to_sym]] = options[:to]
+        @machine.state_transition_table[[@name.to_sym, state.to_sym]] = ::OpenStruct.new(options.merge(event: self))
       end
     end
 

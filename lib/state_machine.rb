@@ -47,13 +47,19 @@ module StateMachine
 
     def event(name, &block)
       @events ||= Set.new
-      event = StateMachine::Event.new(name, self, &block)
+      event = StateMachine::Event.new(name.to_sym, self, &block)
       events.add event
 
       define_method "#{name}!" do
         key = [event.name, current_state]
-        if state = state_transition_table[key]
-          self.current_state = state
+        if transition = state_transition_table[key]
+          if transition.when.class == Proc
+            self.current_state = transition.to if transition.when.call
+          elsif transition.when.class == Symbol
+            self.current_state = transition.to if send(transition.when)
+          elsif transition.when.nil?
+            self.current_state = transition.to
+          end
         else
           raise TransitionError.new
         end
@@ -82,7 +88,7 @@ module StateMachine
   def method_missing method, *args, &block
     return super method, *args, &block unless method.to_s =~ /can_(\w+)?/
     self.class.send(:define_method, method) do
-      self.class.events.include?(StateMachine::Event.new($1.to_sym, self))
+      self.class.events.include?(StateMachine::Event.new($1.to_s.to_sym, self))
     end
 
     self.send method, *args, &block
@@ -92,7 +98,7 @@ module StateMachine
     GraphViz::new( :G, :type => :digraph ) do |g|
       nodes = klass.state_transition_table.map do |k, v|
         node1 = g.add_nodes( k[1].to_s.capitalize )
-        node2 = g.add_nodes( v.to_s.capitalize )
+        node2 = g.add_nodes( v.to.to_s.capitalize )
         g.add_edges( node1, node2, label: k[0].to_s.capitalize)
       end
     end.output( :png => "#{klass}.png" )

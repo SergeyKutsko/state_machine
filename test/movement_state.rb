@@ -11,10 +11,14 @@ class MovementState
   end
 
   event :run do
-    transitions from: [:standing, :walking], to: :running
+    transitions from: [:standing, :walking], to: :running, when: :run_possible?
   end
 
   event :hold do
-    transitions from: [:walking, :running], to: :standing
+    transitions from: [:walking, :running], to: :standing, when: lambda { false }
+  end
+
+  def run_possible?
+    true
   end
 end

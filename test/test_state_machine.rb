@@ -75,6 +75,8 @@ class StateMachineTest < Minitest::Test
     assert_equal true, @object.walking?
     @object.run!
     assert_equal true, @object.running?
+    @object.hold!
+    assert_equal false, @object.standing?
   end
 
 

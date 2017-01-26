@@ -14,6 +14,8 @@
 * A: [Dependencies](http://www.graphviz.org/Download..php)
 * Q: How to run tests
 * A: `rake test`
+* Q: How to draw graph of MovementState?
+* A: `rake state_machine:draw`
 
 ### Contribution guidelines ###
 
