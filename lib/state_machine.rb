@@ -88,7 +88,12 @@ module StateMachine
   def method_missing method, *args, &block
     return super method, *args, &block unless method.to_s =~ /can_(\w+)?/
     self.class.send(:define_method, method) do
-      self.class.events.include?(StateMachine::Event.new($1.to_s.to_sym, self))
+      event = StateMachine::Event.new($1.to_s.to_sym, self)
+      if self.class.events.include?(event)
+        !!state_transition_table[[event.name, current_state]]
+      else
+        false
+      end
     end
 
     self.send method, *args, &block

@@ -111,7 +111,7 @@ class StateMachineTest < Minitest::Test
   end
 
   def test_event_querying_when_event_defined_hold
-    assert_equal true,
+    assert_equal false,
       @object.can_hold?
   end
 end
