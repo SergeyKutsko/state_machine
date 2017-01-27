@@ -9,7 +9,7 @@ namespace :state_machine do
 end
 
 Rake::TestTask.new do |t|
-  t.libs << 'test'
+  t.libs << 'lib'
 end
 
 desc 'Run tests'

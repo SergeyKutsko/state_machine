@@ -1,5 +1,7 @@
+require 'minitest'
 require 'minitest/autorun'
-require 'test_helper'
+require_relative './movement_state'
+require_relative './test_helper'
 
 # Test MovementState class
 class StateMachineTest < Minitest::Test
