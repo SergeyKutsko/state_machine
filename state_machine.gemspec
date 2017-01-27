@@ -8,10 +8,11 @@ Gem::Specification.new do |s|
   s.email       = 'kutsko86@gmail.com'
   s.files       = %w[lib/state_machine.rb lib/state_machine/event.rb lib/state_machine/state.rb]
   s.license     = 'MIT'
-  s.homepage    = "https://bitbucket.org/sergey_kutsko/state_machine/overview"
+  s.homepage    = 'https://bitbucket.org/sergey_kutsko/state_machine/overview'
 
   s.add_development_dependency('rake')
   s.add_development_dependency('simplecov')
   s.add_development_dependency('minitest')
-  s.add_development_dependency('ruby-graphviz')
+  s.add_development_dependency('rubocop')
+  s.add_runtime_dependency('ruby-graphviz')
 end

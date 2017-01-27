@@ -2,7 +2,6 @@ require 'minitest/autorun'
 require 'test_helper'
 
 class StateMachineTest < Minitest::Test
-
   def setup
     @object = MovementState.new
   end
@@ -96,8 +95,9 @@ class StateMachineTest < Minitest::Test
   end
 
   def test_event_querying_when_no_event_defined
-    assert_equal false,
+    assert_raises NoMethodError do
       @object.can_jump?
+    end
   end
 
   def test_event_querying_when_event_defined_walk

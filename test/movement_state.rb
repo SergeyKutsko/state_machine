@@ -1,4 +1,5 @@
 require 'state_machine'
+# Class for testing purpose and example
 class MovementState
   include StateMachine
 
@@ -7,30 +8,43 @@ class MovementState
   state :running
 
   event :walk do
-    transitions from: :standing, to: :walking
+    transitions from: :standing,
+                to: :walking
   end
 
   event :run do
-    transitions(from: [:standing, :walking], to: :running, when: :run_possible?)
+    transitions from: [:standing, :walking],
+                to: :running,
+                when: :symbol_run_possible?,
+                before: :before_run_transition,
+                after: -> { run_possible? }
   end
 
   event :hold do
-    transitions from: [:walking, :running], to: :standing, when: lambda { false }
+    transitions from: [:walking, :running],
+                to: :standing,
+                when: -> { run_possible? }
   end
 
-  def run_possible?
+  def before_run_transition
     true
   end
 
+  def symbol_run_possible?
+    true
+  end
+
+  def run_possible?
+    false
+  end
+
   def leave_standing_state
-    #DO something
-    puts 'leave_standing_state'
+    # DO something
     self
   end
 
   def enter_walking_state
-    #DO something
-    puts 'enter_walking_state'
+    # DO something
     self
   end
 end
