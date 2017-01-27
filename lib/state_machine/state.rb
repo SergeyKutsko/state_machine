@@ -1,4 +1,6 @@
+# Namespace
 module StateMachine
+  # State class definition
   class State
     attr_accessor :name, :options
     def initialize(name, options = {})

@@ -1,4 +1,6 @@
+# Namespace
 module StateMachine
+  # Event class definition
   class Event
     attr_accessor :name
     def initialize(name, machine, &block)
@@ -9,15 +11,15 @@ module StateMachine
 
     def transitions(options = {})
       validate_transition_params(options)
-      #init state transition table on first transitions method call
-      @machine.state_transition_table ||= Hash.new
-      #add tarnsition to table
+      # Init state transition table on first transitions method call
+      @machine.state_transition_table ||= {}
+      # Add tarnsition to table
       [options[:from]].flatten.each do |state|
         @machine.state_transition_table[[self, find_state(state)]] =
-          ::OpenStruct.new to: find_state(options[:to]),
-                           when: options[:when],
-                           before: options[:before],
-                           after: options[:after]
+          {
+            to: find_state(options[:to]), when: options[:when],
+            before: options[:before], after: options[:after]
+          }
       end
     end
 
@@ -32,25 +34,23 @@ module StateMachine
     private
 
     def find_state(name)
-      if state = states.find{ |el| el == name }
-        state
-      else
-        raise UndefinedStateError.new(name)
-      end
+      state = states.find { |el| el == name }
+      raise Errors::UndefinedStateError, name unless state
+      state
     end
 
     def states
       @states ||= @machine.states.to_a
     end
 
-    def valid_transition_options_keys
-      @valid_transition_options_keys ||= %i[from to when before after]
+    def valid_transition_keys
+      @valid_transition_keys ||= %i(from to when before after)
     end
 
     def validate_transition_params(options)
-      return if (options.keys - valid_transition_options_keys).empty?
+      return if (options.keys - valid_transition_keys).empty?
       raise ArgumentError,
-            "Transition args must be #{valid_transition_options_keys.join(", ")}"
+            "Transition args must be #{valid_transition_keys.join(', ')}"
     end
   end
 end

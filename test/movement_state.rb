@@ -1,4 +1,4 @@
-require 'state_machine'
+require_relative '../lib/state_machine'
 # Class for testing purpose and example
 class MovementState
   include StateMachine

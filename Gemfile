@@ -1,5 +1,5 @@
-source "http://www.rubygems.org"
+source 'http://www.rubygems.org'
 
-ruby '~> 2.3.0'
+ruby '>= 2.3.0'
 
 gemspec

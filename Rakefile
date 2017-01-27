@@ -1,5 +1,5 @@
 require 'rake/testtask'
-require './test/movement_state'
+require './test/movement_state.rb'
 
 namespace :state_machine do
   desc 'Draws state machines using GraphViz'
@@ -8,10 +8,9 @@ namespace :state_machine do
   end
 end
 
-
 Rake::TestTask.new do |t|
   t.libs << 'test'
 end
 
-desc "Run tests"
-task :default => :test
+desc 'Run tests'
+task default: :test
