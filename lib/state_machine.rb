@@ -20,9 +20,9 @@ module StateMachine
     def draw(klass)
       GraphViz.new(:G, type: :digraph) do |g|
         klass.state_transition_table.map do |k, v|
-          g.add_edges(g.add_nodes(k[1].name.capitalize),
-                      g.add_nodes(v.to.capitalize),
-                      label: k[0].name.capitalize)
+          g.add_edges(g.add_nodes(k[1].to_s),
+                      g.add_nodes(v[:to].to_s),
+                      label: k[0].name)
         end
       end.output(png: "#{klass}.png")
       true

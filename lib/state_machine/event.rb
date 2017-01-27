@@ -23,8 +23,12 @@ module StateMachine
       end
     end
 
+    def to_s
+      name.to_s
+    end
+
     def hash
-      name.to_s.hash
+      to_s.hash
     end
 
     def eql?(other)
