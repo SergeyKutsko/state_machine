@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     state_machine (0.0.1)
+      rake
       ruby-graphviz
 
 GEM
