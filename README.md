@@ -2,7 +2,7 @@
 
 ### What is this repository for? ###
 
-* Simple state machine implementation for PORO
+* Simple state machine implementation for PORO via DSL
 * Version 0.0.1
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
